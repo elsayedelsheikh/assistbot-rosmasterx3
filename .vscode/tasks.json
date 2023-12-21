@@ -4,53 +4,6 @@
         "version": "2.0.0",
         "tasks": [
             {
-                "label": "sim: Start Simulation - 1#UAV",
-                "detail": "Start Simulation in Gazebo and Launch SITL and QGC for 1 UAV.",
-                "dependsOn": [
-                    "SITL for Gazebo",
-                    "gazebo_ros runway_world",
-                    "mavros launch",
-                    "QGC"
-                ],
-                "problemMatcher": []
-            },
-            {
-                "label": "SITL Only",
-                "detail": "Start Simulation In The Loop software.",
-                "type": "shell",
-                "command": "ThirdParty/ardupilot/Tools/autotest/sim_vehicle.py -v ArduCopter --console",
-                "problemMatcher": []
-            },
-            {
-                "label": "SITL for Gazebo",
-                "detail": "Start SITL for gazebo sim.",
-                "type": "shell",
-                "command": "ThirdParty/ardupilot/Tools/autotest/sim_vehicle.py -v ArduCopter -f gazebo-iris --console",
-                "problemMatcher": []
-            },
-            {
-                "label": "Gazebo runway world without ROS",
-                "detail": "Start gazebo simulation with iris arudcopter runway world.",
-                "type": "shell",
-                "options": {
-                    "env": {
-                        "GAZEBO_MODEL_PATH": "ThirdParty/ardupilot_gazebo/models"
-                    }
-                },
-                "command": "gazebo --verbose ThirdParty/ardupilot_gazebo/worlds/iris_arducopter_runway.world",
-                "dependsOn": [
-                    "build"
-                ],
-                "problemMatcher": []
-            },
-            {
-                "label": "QGC",
-                "detail": "Start QGroundControl.",
-                "type": "shell",
-                "command": "./ThirdParty/QGroundControl.AppImage",
-                "problemMatcher": []
-            },
-            {
                 "label": "build",
                 "detail": "Build workspace (default)",
                 "type": "shell",
@@ -89,74 +42,6 @@
                 "command": "python3 .devcontainer/repos_to_submodules.py",
                 "problemMatcher": []
             },
-            {
-                "type": "ros",
-                "command": "roslaunch",
-                "args": [
-                    "ego_planner",
-                    "rviz.launch"
-                ],
-                "options": {
-                    "env": {
-                        "LIBGL_ALWAYS_SOFTWARE": "1"
-                    }
-                },
-                "problemMatcher": [
-                    "$roslaunch"
-                ],
-                "label": "rviz: visualize ego_planner",
-                "detail": "Start rviz to visualize ego_planner"
-            },
-            {
-                "type": "ros",
-                "command": "roslaunch",
-                "args": [
-                    "ego_planner_gz",
-                    "runway.launch"
-                ],
-                "options": {
-                    "env": {
-                        "GAZEBO_MODEL_PATH": "ThirdParty/ardupilot_gazebo/models"
-                    }
-                },
-                "problemMatcher": [
-                    "$roslaunch"
-                ],
-                "label": "gazebo_ros runway_world",
-            },
-            {
-                "type": "ros",
-                "command": "roslaunch",
-                "args": [
-                    "ego_planner_gz",
-                    "single_drone_interactive.launch"
-                ],
-                "problemMatcher": [
-                    "$roslaunch"
-                ],
-                "label": "single_drone_interactive",
-            },
-            {
-                "label": "s: single drone sim",
-                "detail": "Start single drone sim",
-                "dependsOn": [
-                    "rviz: visualize ego_planner",
-                    "single_drone_interactive"
-                ],
-                "problemMatcher": []
-            },
-            {
-                "type": "ros",
-                "command": "roslaunch",
-                "args": [
-                    "ego_planner_gz",
-                    "apm.launch"
-                ],
-                "problemMatcher": [
-                    "$roslaunch"
-                ],
-                "label": "mavros launch"
-            }
         ],
         "inputs": [
             {
