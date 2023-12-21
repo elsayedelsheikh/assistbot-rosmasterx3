@@ -1,9 +1,11 @@
 #!/bin/bash
 set -e
-ws_dir=$(pwd)
 
-## Build the ROS Workspace
-cd $ws_dir
-catkin_make
-echo "source $ws_dir/devel/setup.bash" >> ~/.bashrc
-# echo "export GAZEBO_MODEL_PATH=$ws_dir/ThirdParty/pacakge_name/models" >> ~/.bashrc
+# Set the default build type
+BUILD_TYPE=RelWithDebInfo
+colcon build \
+        --merge-install \
+        --symlink-install \
+        --paths src\* \
+        --cmake-args "-DCMAKE_BUILD_TYPE=$BUILD_TYPE" "-DCMAKE_EXPORT_COMPILE_COMMANDS=On" \
+        -Wall -Wextra -Wpedantic

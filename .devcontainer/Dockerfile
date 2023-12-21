@@ -1,4 +1,4 @@
-FROM althack/ros:humble-gazebo-nvidia
+FROM althack/ros2:humble-gazebo-nvidia
 
 ENV DEBIAN_FRONTEND=noninteractive
 #################################################################################################

@@ -1,6 +1,6 @@
 // See https://aka.ms/vscode-remote/devcontainer.json for format details.
 {
-	"name": "ROS Noetic",
+	"name": "ROS Humble: Assistbot",
 	"dockerFile": "Dockerfile",
 	"build": {
 		"args": {
