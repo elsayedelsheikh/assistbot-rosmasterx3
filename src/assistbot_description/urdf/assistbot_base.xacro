@@ -23,12 +23,12 @@
                 <color rgba="0 0.7 0 1"/>
             </material>
         </visual>
-        <collision>
+        <!-- <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
                 <mesh filename="package://assistbot_description/meshes/X3/base_link.STL"/>
             </geometry>
-        </collision>
+        </collision> -->
     </link>
     <joint name="base_joint" type="fixed">
         <parent link="base_footprint"/>

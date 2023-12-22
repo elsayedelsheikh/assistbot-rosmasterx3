@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
+  <!-- Visuals -->
+  <gazebo reference="base_link">
+      <visual>  
+        <material>
+          <ambient>0.2764 0.1588 0.1509 1.0</ambient>  
+          <diffuse>0.2764 0.1588 0.1509 1.0</diffuse>  
+          <specular>0.2764 0.1588 0.1509 1.0</specular>  
+          <emissive>0.0 0.0 0.0 0.0</emissive>  
+        </material>
+      </visual>  
+  </gazebo>
+
+  <gazebo reference="camera_link">
+    <visual>
+      <material>
+          <ambient>0.8756 0.4588 0.12 1.0</ambient>  
+          <diffuse>0.8756 0.4588 0.12 1.0</diffuse>  
+          <specular>0.8756 0.4588 0.12 1.0</specular>  
+          <emissive>0.0 0.0 0.0 0.0</emissive>  
+      </material>
+    </visual>
+  </gazebo>
+
+  <gazebo reference="laser_link">
+    <visual>
+      <material>
+          <ambient>0.12 0.9588 0.12 1.0</ambient>  
+          <diffuse>0.12 0.9588 0.12 1.0</diffuse>  
+          <specular>0.12 0.9588 0.12 1.0</specular>  
+          <emissive>0.0 0.0 0.0 0.0</emissive>  
+      </material>
+    </visual>
+  </gazebo>
+
   <!-- Wheels -->
   <gazebo reference="front_left_wheel">
       <visual>  
@@ -11,8 +45,8 @@
           <emissive>0.0 0.0 0.0 0.0</emissive>  
         </material>
       </visual>  
-      <!-- <mu1>0.01</mu1>
-      <mu2>0.01</mu2> -->
+      <mu1>0.01</mu1>
+      <mu2>0.01</mu2>
   </gazebo>
   <gazebo reference="front_right_wheel">
       <visual>  
@@ -23,8 +57,8 @@
           <emissive>0.0 0.0 0.0 0.0</emissive>  
         </material>
       </visual>  
-      <!-- <mu1>0.01</mu1>
-      <mu2>0.01</mu2> -->
+      <mu1>0.01</mu1>
+      <mu2>0.01</mu2>
   </gazebo>
   <gazebo reference="back_left_wheel">
       <visual>  
@@ -35,8 +69,8 @@
           <emissive>0.0 0.0 0.0 0.0</emissive>  
         </material>
       </visual>  
-      <!-- <mu1>0.01</mu1>
-      <mu2>0.01</mu2> -->
+      <mu1>0.01</mu1>
+      <mu2>0.01</mu2>
   </gazebo>
   <gazebo reference="back_right_wheel">
       <visual>  
@@ -47,18 +81,17 @@
           <emissive>0.0 0.0 0.0 0.0</emissive>  
         </material>
       </visual>  
-      <!-- <mu1>0.01</mu1>
-      <mu2>0.01</mu2> -->
+      <mu1>0.01</mu1>
+      <mu2>0.01</mu2>
   </gazebo>
 
   <!-- Planar motion plugin to behave like Mecnum wheels -->
   <gazebo>
     <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
-      <!-- <ros>
+      <ros>
         <argument>odom:=odom/unfiltered</argument>
-      </ros> -->
+      </ros>
       <command_topic>cmd_vel</command_topic>
-      <odometry_topic>odom/unfiltered</odometry_topic>
       <odometry_frame>odom</odometry_frame>
       <odometry_rate>20.0</odometry_rate>
       <robot_base_frame>base_footprint</robot_base_frame>
