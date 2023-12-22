@@ -7,6 +7,7 @@ Panels:
         - /Global Options1
         - /Status1
         - /RobotModel1
+        - /TF1
       Splitter Ratio: 0.5
     Tree Height: 555
   - Class: rviz_common/Selection
@@ -91,6 +92,16 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        back_left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        back_right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         base_footprint:
           Alpha: 1
           Show Axes: false
@@ -101,6 +112,16 @@ Visualization Manager:
           Show Trail: false
           Value: true
         camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_right_wheel:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -158,19 +179,93 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz_default_plugins/TF
-      Enabled: false
+      Enabled: true
       Frame Timeout: 15
       Frames:
         All Enabled: true
-      Marker Scale: 1
+        arm_link1:
+          Value: true
+        arm_link2:
+          Value: true
+        arm_link3:
+          Value: true
+        arm_link4:
+          Value: true
+        arm_link5:
+          Value: true
+        back_left_wheel:
+          Value: true
+        back_right_wheel:
+          Value: true
+        base_footprint:
+          Value: true
+        base_link:
+          Value: true
+        camera_link:
+          Value: true
+        front_left_wheel:
+          Value: true
+        front_right_wheel:
+          Value: true
+        imu_link:
+          Value: true
+        laser_link:
+          Value: true
+        llink1:
+          Value: true
+        llink2:
+          Value: true
+        llink3:
+          Value: true
+        mono_link:
+          Value: true
+        rlink1:
+          Value: true
+        rlink2:
+          Value: true
+        rlink3:
+          Value: true
+      Marker Scale: 0.30000001192092896
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: false
       Tree:
-        {}
+        base_footprint:
+          base_link:
+            arm_link1:
+              arm_link2:
+                arm_link3:
+                  arm_link4:
+                    arm_link5:
+                      llink1:
+                        llink2:
+                          {}
+                      llink3:
+                        {}
+                      rlink1:
+                        rlink2:
+                          {}
+                      rlink3:
+                        {}
+                    mono_link:
+                      {}
+            back_left_wheel:
+              {}
+            back_right_wheel:
+              {}
+            camera_link:
+              {}
+            front_left_wheel:
+              {}
+            front_right_wheel:
+              {}
+            imu_link:
+              {}
+            laser_link:
+              {}
       Update Interval: 0
-      Value: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -217,7 +312,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 1.3689097166061401
+      Distance: 0.708823025226593
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -232,10 +327,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.640397846698761
+      Pitch: 0.26039770245552063
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.0503979921340942
+      Yaw: 5.716764450073242
     Saved: ~
 Window Geometry:
   Displays:
@@ -253,5 +348,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1200
-  X: 28
-  Y: 28
+  X: -4
+  Y: -4

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="assistbot" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:arg name="use_manipulator" default="false" />
+  <xacro:arg name="sim_gazebo_classic" default="false" />
+
+  <!-- Load Base -->
+  <xacro:include filename="$(find assistbot_description)/urdf/assistbot_base.xacro" />
+  <xacro:if value="$(arg sim_gazebo_classic)">
+    <xacro:include filename="$(find assistbot_description)/gazebo/robot.gazebo.xacro" />
+  </xacro:if>
+
+  <!-- Load Manipulator -->
+  <xacro:if value="$(arg use_manipulator)">
+    <xacro:include filename="$(find assistbot_description)/urdf/assistbot_manipulator.xacro" />
+    <!-- <xacro:guardian_base_ros2_control
+      prefix="$(arg prefix)"
+      sim_gazebo_classic="$(arg sim_gazebo_classic)"/> -->
+  </xacro:if>
+
+</robot>
+

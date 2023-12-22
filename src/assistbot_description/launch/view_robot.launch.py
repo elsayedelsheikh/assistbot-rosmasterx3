@@ -5,7 +5,7 @@ from launch.substitutions import Command, FindExecutable, LaunchConfiguration, P
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
-from launch_ros.parameter_descriptions import ParameterValue
+from ament_index_python.packages import get_package_share_directory
 
 
 def generate_launch_description():
@@ -22,7 +22,7 @@ def generate_launch_description():
         declared_arguments.append(
         DeclareLaunchArgument(
                 "description_file",
-                default_value="yahboomcar_X3.urdf",
+                default_value="assistbot.urdf.xacro",
                 description="URDF/XACRO description file with the robot.",
         )
         )

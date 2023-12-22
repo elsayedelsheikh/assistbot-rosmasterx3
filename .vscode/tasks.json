@@ -12,13 +12,51 @@
             "problemMatcher": []
         },
         {
-            "label": "v: visualize robot",
-            "detail": "Launch foxglove_bridge.",
-            "type": "shell",
-            "command": "ros2 launch foxglove_bridge foxglove_bridge_launch.xml",
-            "problemMatcher": []
+            "type": "ros",
+            "problemMatcher": [
+                "$roslaunch"
+            ],
+            "label": "sim: simulate robot",
+            "detail": "Start robot simulation in gazebo.",
+            "command": "ros2 launch assistbot_gazebo sim.launch.py",
+            "dependsOn": [
+                "source"
+            ],
         },
-        // Build tasks
+        // {
+        //     "label": "v: viz with foxglove",
+        //     "detail": "Viz using foxglove_bridge.",
+        //     "type": "shell",
+        //     "command": "ros2 launch foxglove_bridge foxglove_bridge_launch.xml",
+        //     "problemMatcher": []
+        // },
+        {
+            "type": "ros",
+            "command": "source install/setup.bash",
+            "problemMatcher": [
+                "$roslaunch"
+            ],
+            "label": "source environment",
+            "detail": "source install/setup.bash"
+        },
+        {
+            "type": "ros",
+            "command": "ros2 launch assistbot_description view_robot.launch.py",
+            // "options": {
+            //     "env": {
+            //         "LIBGL_ALWAYS_SOFTWARE": "1"
+            //     }
+            // },
+            "problemMatcher": [
+                "$roslaunch"
+            ],
+            "dependsOn": [
+                "source"
+            ],
+            "label": "v: view robot description",
+            "detail": "Start rviz to visualize robot description"
+        },
+    // Build tasks
         {
             "label": "build",
             "detail": "Build workspace (default)",
