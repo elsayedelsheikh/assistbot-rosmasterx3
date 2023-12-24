@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'assistbot_bringup'
+package_name = 'assistbot_base'
 
 setup(
     name=package_name,
@@ -20,6 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'assistbot_client = assistbot_base.assistbot_client:main',
+            'assistbot_server = assistbot_base.assistbot_server:main',
         ],
     },
 )
