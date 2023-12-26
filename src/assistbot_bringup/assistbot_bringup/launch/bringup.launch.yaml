@@ -1,0 +1,6 @@
+launch:
+- node:
+    pkg: "assistbot_base"
+    exec: "assistbot_base"
+    name: "assistbot_base"
+    # params-file: "assistbot_base.yaml"

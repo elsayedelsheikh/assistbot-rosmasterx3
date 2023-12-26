@@ -22,6 +22,7 @@ setup(
         'console_scripts': [
             'assistbot_client = assistbot_base.assistbot_client:main',
             'assistbot_server = assistbot_base.assistbot_server:main',
+            'assistbot_base = assistbot_base.assistbot_base:main'
         ],
     },
 )
