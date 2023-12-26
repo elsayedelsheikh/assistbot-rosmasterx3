@@ -226,11 +226,7 @@ class LowLevelController(Node):
         encoder_value = (encoder_a << 1) | encoder_b
         encoder_position = (self.last_encoder_val[encoder_id-1] << 2) | encoder_value
 
-        self.last_encoder_val[encoder_id-1] = encoder_value
-        if self.debug:
-            self.get_logger().info(f"Encoder {encoder_id}: {encoder_value}")
-            self.get_logger().info(f"Outcome: {self.encoder_outcome[encoder_value]}")
-        
+        self.last_encoder_val[encoder_id-1] = encoder_value        
         return self.encoder_outcome[encoder_position]
         
     ## Function to control the motors
