@@ -220,6 +220,8 @@ class LowLevelController(Node):
         encoder_b = GPIO.input(encoder[1])
         encoder_value = (encoder_a << 1) | encoder_b
         encoder_value = (self.last_encoder_val[encoder_id-1] << 2) | encoder_value
+        if self.debug:
+            self.get_logger().info(f"Encoder {encoder_id}: {encoder_value}")
 
         self.last_encoder_val[encoder_id-1] = encoder_value
         return self.encoder_outcome[encoder_value]
