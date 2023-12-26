@@ -192,7 +192,9 @@ class LowLevelController(Node):
         return target_rps, forward_dir
 
     def control_cycle(self):
-        self.encoder_counters = [self.encoder_counters[i] + self.get_encoder(i+1) for i in range(4)]
+        for i in range(4):
+            self.encoder_counters[i] = self.get_encoder(i+1)
+
         current_rps = [self.encoder_counters[i] / self.TPR for i in range(4)]
         target_rps, forward_dir = self.calc_motor_target_rps()
         error = [target_rps[i] - current_rps[i] for i in range(4)]
