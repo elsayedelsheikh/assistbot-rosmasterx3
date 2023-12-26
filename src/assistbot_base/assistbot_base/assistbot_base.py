@@ -191,7 +191,7 @@ class LowLevelController(Node):
         """
         u = self.h_mtx.dot(self.twist) ## u is the velocity of the wheel
         target_rps = u / (2 * np.pi)
-        forward_bool = np.sign(target_rps) == 0
+        forward_bool = np.bool(target_rps > 0)
         return target_rps, forward_bool
 
     def control_cycle(self):
