@@ -223,14 +223,14 @@ class LowLevelController(Node):
         encoder_a = GPIO.input(encoder[0])
         encoder_b = GPIO.input(encoder[1])
         encoder_value = (encoder_a << 1) | encoder_b
-        encoder_value = (self.last_encoder_val[encoder_id-1] << 2) | encoder_value
+        encoder_position = (self.last_encoder_val[encoder_id-1] << 2) | encoder_value
 
         self.last_encoder_val[encoder_id-1] = encoder_value
         if self.debug:
             self.get_logger().info(f"Encoder {encoder_id}: {encoder_value}")
             self.get_logger().info(f"Outcome: {self.encoder_outcome[encoder_value]}")
         
-        return self.encoder_outcome[encoder_value]
+        return self.encoder_outcome[encoder_position]
         
     ## Function to control the motors
     def motor_pwm(self, motor_id, pwm, forward_dir):
