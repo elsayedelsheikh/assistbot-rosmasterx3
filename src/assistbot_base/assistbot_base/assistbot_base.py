@@ -23,8 +23,8 @@ class LowLevelController(Node):
         ## Robot Parameters
         self.declare_parameter('number_of_ticks_per_revolution', 20)
         self.declare_parameter('wheel_radius', 0.05)
-        self.declare_parameter('wheel_separation', 0.2)  # Distance between the wheels left to right
-        self.declare_parameter('wheel_base', 0.25)       # Distance between the wheels front to back
+        self.declare_parameter('wheel_separation', 0.20)  # Distance between the wheels left to right
+        self.declare_parameter('wheel_base', 0.22)       # Distance between the wheels front to back
         # self.declare_parameter('max_linear_speed', 0.5)
 
         self.TPR = self.get_parameter('number_of_ticks_per_revolution').get_parameter_value().integer_value
