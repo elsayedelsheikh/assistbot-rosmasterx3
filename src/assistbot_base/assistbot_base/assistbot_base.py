@@ -207,7 +207,7 @@ class LowLevelController(Node):
         if self.debug:
             self.get_logger().info(f"Encoder Counters: {self.encoder_counters}")
             self.get_logger().info(f"Current RPS: {self.current_rps}")
-            self.get_logger().info(f"Target RPS: {target_rps}")
+            self.get_logger().info(f"Target RPS: {target_rps.tolist()}")
             # self.get_logger().info(f"Error: {error}")
             self.get_logger().info(f"PWM: {output}")
             # self.get_logger().info(f"Forward Direction: {forward_dir}")
