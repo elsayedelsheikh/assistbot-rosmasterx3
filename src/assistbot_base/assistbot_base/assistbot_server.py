@@ -71,10 +71,15 @@ class SerialServer(Node):
         GPIO.setup(l298n2_enb,GPIO.LOW)
 
         ### Map each motor to its corresponding pins
-        motor_fr = [l298n1_ena, l298n1_in1, l298n1_in2]
-        motor_fl = [l298n1_enb, l298n1_in3, l298n1_in4]
-        motor_br = [l298n2_ena, l298n2_in1, l298n2_in2]
-        motor_bl = [l298n2_enb, l298n2_in3, l298n2_in4]
+        motor_br = [l298n1_ena, l298n1_in1, l298n1_in2, GPIO.PWM(l298n1_ena, 1000)]
+        motor_bl = [l298n1_enb, l298n1_in3, l298n1_in4, GPIO.PWM(l298n1_enb, 1000)]
+        motor_fr = [l298n2_ena, l298n2_in1, l298n2_in2, GPIO.PWM(l298n2_ena, 1000)]
+        motor_fl = [l298n2_enb, l298n2_in3, l298n2_in4, GPIO.PWM(l298n2_enb, 1000)]
+
+        motor_br[3].start(0)  
+        motor_bl[3].start(0)
+        motor_fr[3].start(0)
+        motor_fl[3].start(0)
 
         self.motor_ids ={
             1: motor_fr, 
@@ -93,12 +98,17 @@ class SerialServer(Node):
         self.last_linear = None
         self.last_angular = None
 
+        # self.motor_control(1,30,0)
+        # self.motor_control(2,30,0)
+        # self.motor_control(3,30,0)
+        # self.motor_control(4,30,0)
+
 
     def __del__(self):
         if self.debug:
             print("Closing serial port")
-        if self.ser.is_open:
-            self.ser.close()
+        # if self.ser.is_open:
+        #     self.ser.close()
 
     ## Function to control the motors
     def motor_control(self, motor_id, pwm, forward_dir):
@@ -115,7 +125,7 @@ class SerialServer(Node):
             motor = self.motor_ids[motor_id]
             GPIO.output(motor[1],forward_dir)
             GPIO.output(motor[2],not forward_dir)
-            motor[0].ChangeDutyCycle(pwm)
+            motor[3].ChangeDutyCycle(pwm)
         else:
             if self.debug:
                 self.get_logger().warn("Motor id %d not found"%(motor_id))
