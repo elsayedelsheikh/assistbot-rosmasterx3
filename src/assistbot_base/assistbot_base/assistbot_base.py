@@ -202,7 +202,7 @@ class LowLevelController(Node):
             self.current_rps[i] = self.encoder_counters[i] / self.TPR
             error = target_rps[i] - self.current_rps[i]
             output[i] = self.pid_controllers[i].update(error)
-            self.motor_pwm(i+1, output[i], 1)
+            self.motor_pwm(i+1, int(output[i]), 1)
         if self.debug:
             self.get_logger().info(f"Encoder Counters: {self.encoder_counters}")
             self.get_logger().info(f"Current RPS: {self.current_rps}")
