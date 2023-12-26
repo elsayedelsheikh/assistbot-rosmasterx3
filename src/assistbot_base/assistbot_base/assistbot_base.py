@@ -161,6 +161,8 @@ class LowLevelController(Node):
             [-l-w, 1,  1]
         ]) / wheel_radius
         self.encoder_counters = [0,0,0,0] # FrontLeft, FrontRight, BackRight, BackLeft respectively
+        self.last_encoder_val = [0b00,0b00,0b00,0b00] # FrontLeft, FrontRight, BackRight, BackLeft respectively 
+        self.encoder_outcome  = [0,1,-1,0,-1,0,0,1,1,0,0,-1,0,-1,1,0]
 
     def __del__(self):
         if self.debug:
@@ -219,7 +221,10 @@ class LowLevelController(Node):
         encoder_a = GPIO.input(encoder[0])
         encoder_b = GPIO.input(encoder[1])
         encoder_value = (encoder_a << 1) | encoder_b
-        return encoder_value
+        encoder_value = (self.last_encoder_val[encoder_id-1] << 2) | encoder_value
+
+        self.last_encoder_val[encoder_id-1] = encoder_value
+        return self.encoder_outcome[encoder_value]
         
     ## Function to control the motors
     def motor_pwm(self, motor_id, pwm, forward_dir):
