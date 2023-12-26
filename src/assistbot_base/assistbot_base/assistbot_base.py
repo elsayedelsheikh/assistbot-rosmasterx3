@@ -198,7 +198,7 @@ class LowLevelController(Node):
         target_rps, forward_dir = self.calc_motor_target_rps()
         output = [0,0,0,0]
         for i in range(4):
-            self.encoder_counters[i] = self.get_encoder(i+1)
+            self.encoder_counters[i] += self.get_encoder(i+1)
             self.current_rps[i] = self.encoder_counters[i] / self.TPR
             error = target_rps[i] - self.current_rps[i]
             output[i] = self.pid_controllers[i].update(error)
