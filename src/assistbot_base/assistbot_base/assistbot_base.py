@@ -21,7 +21,7 @@ class LowLevelController(Node):
         self.declare_parameter('Kd', 0.0)
 
         ## Robot Parameters
-        self.declare_parameter('number_of_ticks_per_revolution', 20)
+        self.declare_parameter('number_of_ticks_per_revolution', 2500)
         self.declare_parameter('wheel_radius', 0.05)
         self.declare_parameter('wheel_separation', 0.20)  # Distance between the wheels left to right
         self.declare_parameter('wheel_base', 0.22)       # Distance between the wheels front to back
@@ -192,8 +192,7 @@ class LowLevelController(Node):
         return target_rps, forward_dir
 
     def control_cycle(self):
-        encoder_val = [self.get_encoder(i) for i in range(1,5)]
-        self.encoder_counters = [self.encoder_counters[i] + encoder_val[i] for i in range(4)]
+        self.encoder_counters = [self.encoder_counters[i] + self.get_encoder(i+1) for i in range(4)]
         current_rps = [self.encoder_counters[i] / self.TPR for i in range(4)]
         target_rps, forward_dir = self.calc_motor_target_rps()
         error = [target_rps[i] - current_rps[i] for i in range(4)]
@@ -201,7 +200,6 @@ class LowLevelController(Node):
         # for i in range(4):
         #     self.motor_pwm(i+1, output[i], forward_dir[i])
         if self.debug:
-            self.get_logger().info(f"Encoder: {encoder_val}")
             self.get_logger().info(f"Encoder Counters: {self.encoder_counters}")
             self.get_logger().info(f"Current RPS: {current_rps}")
             self.get_logger().info(f"Target RPS: {target_rps}")
