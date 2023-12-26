@@ -192,7 +192,6 @@ class LowLevelController(Node):
         u = self.h_mtx.dot(self.twist) ## u is the velocity of the wheel
         target_rps = u / (2 * np.pi)
         forward_bool = np.sign(target_rps) == 0
-        print(forward_bool[0][0])
         return target_rps, forward_bool
 
     def control_cycle(self):
@@ -203,14 +202,14 @@ class LowLevelController(Node):
             self.current_rps[i] = self.encoder_counters[i] / self.TPR
             error = target_rps[i] - self.current_rps[i]
             output[i] = self.pid_controllers[i].update(error)
-            self.motor_pwm(i+1, output[i], forward_dir[0][i])
+            self.motor_pwm(i+1, output[i], forward_dir[i][0])
         if self.debug:
             self.get_logger().info(f"Encoder Counters: {self.encoder_counters}")
             self.get_logger().info(f"Current RPS: {self.current_rps}")
             self.get_logger().info(f"Target RPS: {target_rps.tolist()}")
-            # self.get_logger().info(f"Error: {error}")
+            self.get_logger().info(f"Error: {error}")
             self.get_logger().info(f"PWM: {output}")
-            # self.get_logger().info(f"Forward Direction: {forward_dir}")
+            self.get_logger().info(f"Forward Direction: {forward_dir.tolist()}")
             self.get_logger().info("")
         
     def get_encoder(self, encoder_id):
