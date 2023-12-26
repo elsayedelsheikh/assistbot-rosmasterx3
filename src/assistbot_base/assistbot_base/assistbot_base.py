@@ -211,6 +211,7 @@ class LowLevelController(Node):
             # self.get_logger().info(f"Error: {error}")
             self.get_logger().info(f"PWM: {output}")
             # self.get_logger().info(f"Forward Direction: {forward_dir}")
+            self.get_logger().info("")
         
     def get_encoder(self, encoder_id):
         """
