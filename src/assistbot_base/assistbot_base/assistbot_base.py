@@ -164,6 +164,9 @@ class LowLevelController(Node):
         self.last_encoder_val = [0b00,0b00,0b00,0b00] # FrontLeft, FrontRight, BackRight, BackLeft respectively 
         self.encoder_outcome  = [0,1,-1,0,-1,0,0,1,1,0,0,-1,0,-1,1,0]
 
+        ## Variables 
+        self.current_rps = [0,0,0,0] # FrontLeft, FrontRight, BackRight, BackLeft respectively
+
     def __del__(self):
         if self.debug:
             print("Cleaning up GPIO")
@@ -194,11 +197,10 @@ class LowLevelController(Node):
     def control_cycle(self):
         for i in range(4):
             self.encoder_counters[i] = self.get_encoder(i+1)
-
-        current_rps = [self.encoder_counters[i] / self.TPR for i in range(4)]
-        target_rps, forward_dir = self.calc_motor_target_rps()
-        error = [target_rps[i] - current_rps[i] for i in range(4)]
-        output = [self.pid_controllers[i].update(error[i]) for i in range(4)]
+            # self.current_rps[i] = self.encoder_counters[i] / self.TPR
+        # target_rps, forward_dir = self.calc_motor_target_rps()
+        # error = [target_rps[i] - current_rps[i] for i in range(4)]
+        # output = [self.pid_controllers[i].update(error[i]) for i in range(4)]
         # for i in range(4):
         #     self.motor_pwm(i+1, output[i], forward_dir[i])
         if self.debug:
@@ -222,10 +224,12 @@ class LowLevelController(Node):
         encoder_b = GPIO.input(encoder[1])
         encoder_value = (encoder_a << 1) | encoder_b
         encoder_value = (self.last_encoder_val[encoder_id-1] << 2) | encoder_value
-        if self.debug:
-            self.get_logger().info(f"Encoder {encoder_id}: {encoder_value}")
 
         self.last_encoder_val[encoder_id-1] = encoder_value
+        if self.debug:
+            self.get_logger().info(f"Encoder {encoder_id}: {encoder_value}")
+            self.get_logger().info(f"Outcome: {self.encoder_outcome[encoder_value]}")
+        
         return self.encoder_outcome[encoder_value]
         
     ## Function to control the motors
