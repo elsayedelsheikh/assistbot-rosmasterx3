@@ -195,20 +195,21 @@ class LowLevelController(Node):
         return target_rps, forward_dir
 
     def control_cycle(self):
+        target_rps, forward_dir = self.calc_motor_target_rps()
+        output = [0,0,0,0]
         for i in range(4):
             self.encoder_counters[i] = self.get_encoder(i+1)
-            # self.current_rps[i] = self.encoder_counters[i] / self.TPR
-        # target_rps, forward_dir = self.calc_motor_target_rps()
-        # error = [target_rps[i] - current_rps[i] for i in range(4)]
-        # output = [self.pid_controllers[i].update(error[i]) for i in range(4)]
+            self.current_rps[i] = self.encoder_counters[i] / self.TPR
+            error = target_rps[i] - self.current_rps[i]
+            output[i] = self.pid_controllers[i].update(error)
         # for i in range(4):
         #     self.motor_pwm(i+1, output[i], forward_dir[i])
         if self.debug:
             self.get_logger().info(f"Encoder Counters: {self.encoder_counters}")
-            # self.get_logger().info(f"Current RPS: {current_rps}")
-            # self.get_logger().info(f"Target RPS: {target_rps}")
+            self.get_logger().info(f"Current RPS: {self.current_rps}")
+            self.get_logger().info(f"Target RPS: {target_rps}")
             # self.get_logger().info(f"Error: {error}")
-            # self.get_logger().info(f"PWM: {output}")
+            self.get_logger().info(f"PWM: {output}")
             # self.get_logger().info(f"Forward Direction: {forward_dir}")
         
     def get_encoder(self, encoder_id):
