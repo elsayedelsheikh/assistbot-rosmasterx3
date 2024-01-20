@@ -4,10 +4,10 @@ import numpy as np
 from gpiozero import RotaryEncoder
 
 # Assigning parameter values
-ppr = 2500  # Pulses Per Revolution of the encoder
-tstop = 20  # Loop execution duration (s)
+ppr = 2500      # Pulses Per Revolution of the encoder
+tstop = 7000    # Loop execution duration (s)
 tsample = 0.02  # Sampling period for code execution (s)
-tdisp = 0.5  # Sampling period for values display (s)
+tdisp = 0.5     # Sampling period for values display (s)
 
 # Creating encoder object using GPIO pins 24 and 25
 encoder = RotaryEncoder(19, 13, max_steps=0)
