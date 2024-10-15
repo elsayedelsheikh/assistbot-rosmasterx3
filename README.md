@@ -15,13 +15,13 @@
         - D3: Left B
         - A4: Right A
         - A5: Right B
-4. Test: Open the serial monitor `miniterm -e /dev/ttyUSB0 57600`
+4. Test: Open the serial monitor `minicom -b 57600 -o -D /dev/ttyACM0`
 5. Send the following commands to the Arduino board:
         - `e` - Motor responds with current encoder counts for each motor
         - `r` - Reset encoder values
         - `o <PWM1> <PWM2>` - Set the raw PWM speed of each motor (-255 to 255)
         - `m <Spd1> <Spd2>` - Set the closed-loop speed of each motor in *counts per loop* (Default loop rate is 30, so `(counts per sec)/30`)
-6. Test running at 1 rev/sec: `m <spd> </spd>` where `<spd>` is (encoder_resolution/30)
+6. Test running at 1 rev/sec: `m <spd> <spd>` where `<spd>` is (encoder_resolution/30)
 
 ### Setting control cycle target
 
