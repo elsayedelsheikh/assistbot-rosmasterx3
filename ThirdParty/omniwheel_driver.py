@@ -59,9 +59,9 @@ class Kinematics:
         V = np.array([v_x, v_y, omega])
         T = np.array(
             [
-                [np.cos(theta), -np.sin(theta), 0],
-                [np.sin(theta), np.cos(theta),  0],
-                [0            ,            0,   1]
+                [np.cos(self.heading), -np.sin(self.heading),  0],
+                [np.sin(self.heading),  np.cos(self.heading),  0],
+                [0                   ,                     0,  1]
             ]
         )
         
@@ -79,17 +79,21 @@ class Kinematics:
     def control_cycle(self):
         print("Starting control cycle")
         while True:
-            ## Move Forward
+            ## Move
             v_x = 0.1
             v_y = 0.0
             omega = 0.0
 
             ##TODO: Set the wheel speeds
             wheel_speeds = self.get_wheel_speeds(v_x, v_y, omega)
-            print(wheel_speeds)
+            print("Wheel Velocities: {}".format(wheel_speeds))
 
             ##TODO:: Publish the robot's odometry
             self.get_odom(v_x, v_y, omega)
+            print("Pose: ({:.2f}, {:.2f})".format(self.pose_x, self.pose_y))
+            print("Heading: {}".format(np.degrees(self.heading)))
+
+            time.sleep(1)
 
 
 
