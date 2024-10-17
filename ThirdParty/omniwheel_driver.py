@@ -50,10 +50,10 @@ class Kinematics:
         U = (1/r) * np.dot(H, V)
         return U
     
-    def get_odom(self, v_x, v_y, omega):
+    def update_pose(self, v_x, v_y, omega):
         """
-        Get the robot's odometry given the desired linear and angular velocities.
-        return: x, y, heading
+        Get the robot's odometry given the current linear and angular velocities.
+        updates: x, y, heading
         """
         ## Change in Pose(P): P_dot = T * v
         V = np.array([v_x, v_y, omega])
@@ -89,7 +89,7 @@ class Kinematics:
             print("Wheel Velocities: {}".format(wheel_speeds))
 
             ##TODO:: Publish the robot's odometry
-            self.get_odom(v_x, v_y, omega)
+            self.update_pose(v_x, v_y, omega)
             print("Pose: ({:.2f}, {:.2f})".format(self.pose_x, self.pose_y))
             print("Heading: {}".format(np.degrees(self.heading)))
 
