@@ -23,7 +23,7 @@ class Kinematics:
         u [radians/s] = [w1, w2, w3, w4] = H * v [m/s]
         Where:
             H  : Kinematic matrix
-            v  : Twist vector [omega, v_x, v_y]
+            v  : Twist vector [v_x, v_y, omega]
             w1 : Front left wheel
             w2 : Front right wheel
             w3 : Rear right wheel   
